@@ -30,7 +30,10 @@ https://replit.com/@LuisFernandoMB/GameOfLife#main.cpp
 
 # 🏎️💨 Improvement objective
 Improve the visualization of the project by learning models similar to the ones in the image below.
+
 ![Improvement objective](https://github.com/LFernandoMB/Game-Of-Life/assets/91624923/e708a8d7-c7a7-4842-bdda-8e14b8bd0404)
+
+Create a "Game" Class and insert the "printGrid", "getNextState" and "updateGeneration" functions so that the code becomes OOP.
 
 # 👨🏻‍💻 Conclusion
 I didn't know the model and I learned a lot about it.
