@@ -1,5 +1,8 @@
-#include <iostream>
-#include <vector>
+#include "game_of_life.h"
+
+const int ROWS = 6;
+const int COLS = 10;
+const int GENERATIONS = 5;
 
 // Function to print the current state of the grid
 void printGrid(const std::vector<std::vector<int>>& grid) {
@@ -7,52 +10,55 @@ void printGrid(const std::vector<std::vector<int>>& grid) {
         for (const auto& cell : row) {
             std::cout << (cell == 1 ? '*' : ' ') << ' ';
         }
-        std::cout << '\n';
+        std::cout << std::endl;
     }
 }
 
 // Function to check next cell state based on neighbors
 int getNextState(int currentState, int liveNeighbors) {
     if (currentState && (liveNeighbors == 2 || liveNeighbors == 3)) {
-        return 1; // Living cell with 2 or 3 neighbors survives
+      // Living cell with 2 or 3 neighbors survives
+      return 1; 
     } else if (!currentState && liveNeighbors == 3) {
-        return 1; // Dead cell with 3 neighbors becomes alive
+      // Dead cell with 3 neighbors becomes alive
+      return 1; 
     }
-    return 0; // All other cells die or remain dead
+    // All other cells die or remain dead
+    return 0; 
 }
 
 // Function to update the grid to the next generation
-std::vector<std::vector<int>> updateGeneration(const std::vector<std::vector<int>>& grid) {
-    int rows = grid.size();
-    int cols = grid[0].size();
-    std::vector<std::vector<int>> nextGeneration(rows, std::vector<int>(cols, 0));
+void updateGeneration(std::vector<std::vector<int>>& grid) {
+    std::vector<std::vector<int>> nextGeneration;
+    nextGeneration.reserve(ROWS);
 
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
+    for (int i = 0; i < ROWS; ++i) {
+        nextGeneration.emplace_back();
+        nextGeneration[i].reserve(COLS);
+        for (int j = 0; j < COLS; ++j) {
             // Count the number of living neighbors
             int liveNeighbors = 0;
             for (int dx = -1; dx <= 1; ++dx) {
                 for (int dy = -1; dy <= 1; ++dy) {
-                    int ni = (i + dx + rows) % rows;
-                    int nj = (j + dy + cols) % cols;
+                    int ni = (i + dx + ROWS) % ROWS;
+                    int nj = (j + dy + COLS) % COLS;
                     liveNeighbors += grid[ni][nj];
                 }
             }
-            liveNeighbors -= grid[i][j]; // Delete current cell state
+            // Delete current cell state
+            liveNeighbors -= grid[i][j]; 
 
-            // Update cell state on next generation
-            nextGeneration[i][j] = getNextState(grid[i][j], liveNeighbors);
+            // Update cell state in the next generation
+            nextGeneration[i].push_back(getNextState(grid[i][j], liveNeighbors));
         }
     }
-
-    return nextGeneration;
+    // Update the grid with the next generation
+    grid = std::move(nextGeneration); 
 }
 
 int main() {
-    // Set grid size and initial state
-    int rows = 10;
-    int cols = 20;
-    std::vector<std::vector<int>> grid(rows, std::vector<int>(cols, 0));
+    // Width and height of the grid like as parameters
+    std::vector<std::vector<int>> grid(ROWS, std::vector<int>(COLS, 0)); 
 
     // Set initial grid state
     grid[1][2] = 0;
@@ -62,12 +68,12 @@ int main() {
     grid[3][3] = 1;
 
     // 5 generation simulation
-    for (int generation = 0; generation < 5; ++generation) {
+    for (int generation = 0; generation < GENERATIONS; ++generation) {
         std::cout << "Generation " << generation << ":\n";
         printGrid(grid);
-        std::cout << '\n';
-
-        grid = updateGeneration(grid);
+        std::cout << std::endl;
+        // Update grid to the next generation
+        updateGeneration(grid); 
     }
 
     return 0;
