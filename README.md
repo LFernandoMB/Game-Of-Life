@@ -25,6 +25,9 @@ In this project there are some differences from the original proposal of the "ga
 Working Project:
 ![Working project](https://github.com/LFernandoMB/Game-Of-Life/assets/91624923/fc3fd3b9-c344-48ee-839a-7b8afd1d606a)
 
+In VsCode:
+![image](https://github.com/LFernandoMB/Game-Of-Life/assets/91624923/44a7e8af-d318-4587-b2b8-fa23200b7c78)
+
 Link to access Replit:
 https://replit.com/@LuisFernandoMB/GameOfLife#main.cpp
 
