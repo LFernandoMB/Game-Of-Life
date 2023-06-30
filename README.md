@@ -1,6 +1,9 @@
 # 👾 Game-Of-Life 🧬
+
 Status: Completed ✅
-Improvement target: 06/23/2023 ⚠️
+
+Improvement target: 07/01/2023 (Working only on the weekend)⚠️
+
 Resume: A cellular automaton that follows simple rules: Living or dead cells interact to create complex patterns on a two-dimensional board.
 
 # 📖 The history of project
